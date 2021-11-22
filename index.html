@@ -1,23 +1,44 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Vue.js Lessons</title>
-        <script src="https://unpkg.com/vue"></script>
-        <link rel="stylesheet" href="Styles/style.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    </head>
 
-    <body>
-        
-        <div id="app">
-            <header>
-                <h1 v-text="sitename"></h1>
-            </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Lessons</title>
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" href="Styles/style.css">
+    <script src="https://kit.fontawesome.com/0ecb2c1182.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div id="app">
+        <header>
+            <h1 v-text="sitename"></h1>
+            <button v-text="cartCount + ' ' + cartButton" class="fas fa-shopping-cart"
+                v-on:click="showCheckout"></button>
+        </header>
+        <div v-if="showProduct">
+            <div class="lesson">
+                <img class="lessonImage" v-bind:src="product.image">
+                <h2>Subject: {{product.name}}</h2>
+                <p>Location: {{product.location}}</p>
+                <p>Price: £{{product.price}}</p>
+                <p>Spaces available: {{product.spaces}}</p>
+                <button v-text="product.button" v-on:click="addToCart" v-if="canAdd"></button>
+                <button v-text="product.button" disabled v-else></button>
+            </div>
         </div>
+        <div v-else>
+            
+        </div>
+    </div>
 
-        <script src="Scripts/vueFile.js"></script>
-    </body>
+
+    <script src="Scripts/vueFile.js"></script>
+</body>
+
 </html>

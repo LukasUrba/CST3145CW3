@@ -2,7 +2,9 @@
     var webstore = new Vue({
         el: '#app',
         data: {
-            sitename: 'Vue.js Header',
+            showProduct: true,
+            sitename: 'Extra Curricular',
+            cartButton: 'Checkout',
             cart: [],
             product: {
                 id: 1001,
@@ -11,13 +13,23 @@
                 price: 50,
                 image: "Images/math.png",
                 spaces: 5,
-                btn: "Add to cart"
+                button: "Add to cart"
             }
         },
         methods: {
-
+            addToCart: function() {
+                this.cart.push(this.product.id);
+            },
+            showCheckout() {
+                this.showProduct = this.showProduct ? false : true;
+            }
         },
         computed: {
-
+            cartCount: function() {
+                return this.cart.length || '';
+            },
+            canAdd: function() {
+                return this.product.spaces > this.cartCount;
+            }
         }
     });
