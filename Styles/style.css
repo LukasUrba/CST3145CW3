@@ -16,7 +16,7 @@ header {
 
 header h1 {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     margin-right: 0;
 }
 
@@ -25,6 +25,10 @@ header button {
     height: 30px;
     margin-left: 92%;
     margin-bottom: 10px;
+}
+
+.pageHeader {
+    text-align: center;
 }
 
 .lesson {
@@ -60,4 +64,16 @@ header button {
 .lesson button {
     display: flex;
     margin-left: 180px;
+}
+
+.basket {
+    width: 340px;
+    padding: 20px;
+    border: 5px solid black;
+    border-radius: 20px;
+    margin-left: 200px;
+}
+
+.inputField {
+    margin-left: 28px;
 }
