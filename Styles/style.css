@@ -27,13 +27,17 @@ header button {
     margin-bottom: 10px;
 }
 
-.searchAndSort {
+.searchAndSort, .searchBox {
     left: 85%;
     padding: 20px;
     width: 200px;
     position: fixed;
     border: 5px solid black;
     border-radius: 20px;
+}
+
+.searchAndSort {
+    top: 40%;
 }
 
 .pageHeader {

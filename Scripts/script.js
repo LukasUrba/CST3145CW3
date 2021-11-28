@@ -8,6 +8,7 @@ var webstore = new Vue({
         showProduct: true,
         sitename: 'Extra Curricular',
         cartButton: '<i class="fas fa-shopping-cart"></i> Checkout',
+        searchTerm: '',
         sortStyle: '',
         cart: [],
         order: {
@@ -100,6 +101,15 @@ var webstore = new Vue({
                 return 0;
             }
             return this.products.sort(compare);
+        },
+        searchField() {
+        
+            return this.products.filter(product => {
+                return (product.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+                        product.location.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+                        product.price.toString().includes(this.searchTerm.toLowerCase()) ||
+                        product.spaces.toString().includes(this.searchTerm.toLowerCase()))
+            })
         }
     }
 });

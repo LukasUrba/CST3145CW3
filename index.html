@@ -27,7 +27,10 @@
         <div v-if="showProduct">
             <h2 class="pageHeader">Product List</h2>
             <div class="searchBox">
-
+                <p>
+                    Search:
+                    <input type="text" class="searchInput" v-model="searchTerm" />
+                </p>
             </div>
             <div class="searchAndSort">
                 <p><input type="radio" id="priceLowHigh" value="priceLowHigh" v-model="sortStyle">
@@ -47,8 +50,19 @@
                 </p>
 
             </div>
-            <div v-if="sortStyle === ''">
-                <div v-for="product in products" class="lesson" >
+            <div v-if="searchTerm !== ''">
+                <div v-for="product in searchField" class="lesson">
+                    <img class="lessonImage" v-bind:src="product.image">
+                    <h2>Subject: {{product.name}}</h2>
+                    <p>Location: {{product.location}}</p>
+                    <p>Price: £{{product.price}}</p>
+                    <p>Spaces available: {{product.spaces}}</p>
+                    <button v-html="lessonButton" v-on:click="addToCart(product)" v-if="canAdd(product)"></button>
+                    <button v-html="lessonButton" disabled v-else></button>
+                </div>
+            </div>
+            <div v-else-if="sortStyle === '' && searchTerm === ''">
+                <div v-for="product in products" class="lesson">
                     <img class="lessonImage" v-bind:src="product.image">
                     <h2>Subject: {{product.name}}</h2>
                     <p>Location: {{product.location}}</p>
@@ -59,7 +73,7 @@
                 </div>
             </div>
             <div v-else-if="sortStyle === 'priceLowHigh'">
-                <div v-for="product in sortedProducts" class="lesson" >
+                <div v-for="product in sortedProducts" class="lesson">
                     <img class="lessonImage" v-bind:src="product.image">
                     <h2>Subject: {{product.name}}</h2>
                     <p>Location: {{product.location}}</p>
@@ -102,7 +116,6 @@
                     <button v-html="lessonButton" disabled v-else></button>
                 </div>
             </div>
-
         </div>
         <div class="checkout" v-else>
             <h2 class="pageHeader">Shopping Cart</h2>

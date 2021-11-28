@@ -1,3 +1,6 @@
+
+// List of products to be displayed
+
 products = [
     {
         id: 1001,
