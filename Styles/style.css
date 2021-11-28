@@ -27,6 +27,15 @@ header button {
     margin-bottom: 10px;
 }
 
+.searchAndSort {
+    left: 85%;
+    padding: 20px;
+    width: 200px;
+    position: fixed;
+    border: 5px solid black;
+    border-radius: 20px;
+}
+
 .pageHeader {
     text-align: center;
 }
