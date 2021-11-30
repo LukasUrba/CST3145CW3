@@ -52,7 +52,7 @@ products = [
     },
     {
         id: 1007,
-        name: "Maths",
+        name: "Statistics",
         location: "Basildon",
         price: 50,
         image: "Images/math.png",
