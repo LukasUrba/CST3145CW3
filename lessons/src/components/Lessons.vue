@@ -9,7 +9,7 @@
             <p>Price: £{{product.price}}</p>
             <p>Spaces available: {{product.spaces}}</p>
             <button @click="addProduct(product)">Add to Cart</button>
-            <!-- <button v-html="lessonButton" disabled v-else></button> a-->
+            <!-- <button v-html="lessonButton" disabled v-else></button> -->
         </div>
     </main>
 </template>
