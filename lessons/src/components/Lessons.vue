@@ -1,6 +1,6 @@
 <template>
     <main>
-        <div v-for="product in searchField" :key="product.id">
+        <div v-for="product in products" :key="product.id">
             <figure>
                 <img class="lessonImage" v-bind:src="product.image"/>
             </figure>
@@ -8,14 +8,14 @@
             <p>Location: {{product.location}}</p>
             <p>Price: £{{product.price}}</p>
             <p>Spaces available: {{product.spaces}}</p>
-            <button v-html="lessonButton" @click="addToCart(product)" v-if="canAdd(product)"></button>
-            <button v-html="lessonButton" disabled v-else></button>
+            <button @click="addProduct(product)">Add to Cart</button>
+            <!-- <button v-html="lessonButton" disabled v-else></button> -->
         </div>
     </main>
 </template>
 <script>
     export default {
-        name: "Product list",
+        name: "ProductList",
         data() {
             return {
                 products: [
@@ -103,8 +103,11 @@
             }
         },
         methods: {
-            addToCart(product) {
-                this.$emit('addToCart',product);
+            addProduct(product) {
+                if(product.spaces> 0){
+                    this.$emit('addProduct',product);
+                    product.spaces--;
+                }
             }
         }
     }
