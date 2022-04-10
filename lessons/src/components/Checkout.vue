@@ -10,7 +10,7 @@
             <strong>Last Name: </strong> <input v-model="lName" />
             <strong>Phone Number: </strong> <input v-model="phoneNo" />
             <button>Place Order</button>
-            <!-- a -->
+            
         </p>
     </div>
 </template>
