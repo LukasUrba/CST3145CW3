@@ -5,13 +5,16 @@
       <button @click="showCheckout">{{this.cart.length}} Checkout</button>
     </header>
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <product-list @addProduct='addToCart'></product-list>
+    <main>
+      <product-list @addProduct='addToCart'></product-list>
+      <check-out :cart="cart" @removeProduct='removeProduct'></check-out>
+    </main>
   </div>
 </template>
 
 <script>
 import ProductList from "./components/Lessons.vue";
-// import Checkout from "./components/Lessons.vue";
+import CheckOut from "./components/Checkout.vue";
 
 export default {
   name: 'App',
@@ -26,10 +29,19 @@ export default {
     },
     addToCart(product) {
       this.cart.push(product);
+    },
+    removeProduct(product) {
+      this.cart.some(products => {
+        if(products.id === product.id){
+          product.spaces++;
+          this.cart.splice(this.cart.indexOf(product),1)
+        }
+      });
     }
   },
   components: {
-    ProductList
+    ProductList,
+    CheckOut
   }
 }
 </script>
