@@ -2,11 +2,19 @@
   <div id="app">
     <header>
       <h1>{{ sitename }}</h1>
-      <button @click="showCheckout">{{ this.cart.length }} Checkout</button>
+      <button @click="showCheckout">{{ this.cartLength }} Checkout</button>
     </header>
     <main>
-      <check-out v-if="showCheckoutPage" :cart="cart" @removeProduct="removeProduct"></check-out>
-      <product-list :products='products' @addProduct="addToCart" v-else></product-list>
+      <check-out
+        v-if="showCheckoutPage"
+        :cart="cart"
+        @removeProduct="removeProduct"
+      ></check-out>
+      <product-list
+        :products="products"
+        @addProduct="addToCart"
+        v-else
+      ></product-list>
     </main>
   </div>
 </template>
@@ -19,7 +27,8 @@ export default {
   name: "App",
   data() {
     return {
-      showCheckoutPage : false,
+      showCheckoutPage: false,
+      cartLength: 0,
       sitename: "Vue.js Lessons",
       cart: [],
       products: [
@@ -30,6 +39,7 @@ export default {
           price: 50,
           image: "math.png",
           spaces: 5,
+          inCart: 0,
         },
         {
           id: 1002,
@@ -38,6 +48,7 @@ export default {
           price: 40,
           image: "english.png",
           spaces: 5,
+          inCart: 0,
         },
         {
           id: 1003,
@@ -46,6 +57,7 @@ export default {
           price: 45,
           image: "science.jpeg",
           spaces: 5,
+          inCart: 0,
         },
         {
           id: 1004,
@@ -54,6 +66,7 @@ export default {
           price: 50,
           image: "science.jpeg",
           spaces: 5,
+          inCart: 0,
         },
         {
           id: 1005,
@@ -62,6 +75,7 @@ export default {
           price: 45,
           image: "french.jpeg",
           spaces: 5,
+          inCart: 0,
         },
         {
           id: 1006,
@@ -70,6 +84,7 @@ export default {
           price: 50,
           image: "geography.jpeg",
           spaces: 5,
+          inCart: 0,
         },
         {
           id: 1007,
@@ -78,6 +93,7 @@ export default {
           price: 50,
           image: "math.png",
           spaces: 5,
+          inCart: 0,
         },
         {
           id: 1008,
@@ -86,6 +102,7 @@ export default {
           price: 40,
           image: "IT.png",
           spaces: 5,
+          inCart: 0,
         },
         {
           id: 1009,
@@ -94,6 +111,7 @@ export default {
           price: 40,
           image: "history.jpeg",
           spaces: 5,
+          inCart: 0,
         },
         {
           id: 1010,
@@ -102,6 +120,7 @@ export default {
           price: 45,
           image: "science.jpeg",
           spaces: 5,
+          inCart: 0,
         },
       ],
     };
@@ -111,20 +130,35 @@ export default {
       this.showCheckoutPage = this.showCheckoutPage ? false : true;
     },
     addToCart(product) {
-      this.cart.push(product);
+      let added = false;
+      this.cart.forEach((product2) => {
+        if (product2.id === product.id) {
+          product.inCart++;
+          added = true;
+        }
+      });
+      if (!added) {
+        this.cart.push(product);
+        product.inCart = 1;
+      }
+      this.cartLength++;
     },
     removeProduct(product) {
       this.cart.forEach((product2) => {
-        if (product2.id === product.id) {
+        if (product2.id === product.id && product.inCart > 0) {
           product.spaces++;
-          this.cart.splice(this.cart.indexOf(product), 1);
+          product.inCart--;
+          this.cartLength--;
+        }
+        if (product.inCart == 0) {
+          this.cart.splice(this.cart.indexOf(product),1);
         }
       });
     },
   },
   components: {
     ProductList,
-    CheckOut
+    CheckOut,
   },
 };
 </script>
