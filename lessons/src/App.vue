@@ -1,13 +1,12 @@
 <template>
   <div id="app">
     <header>
-      <h1>{{sitename}}</h1>
-      <button @click="showCheckout">{{this.cart.length}} Checkout</button>
+      <h1>{{ sitename }}</h1>
+      <button @click="showCheckout">{{ this.cart.length }} Checkout</button>
     </header>
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <main>
-      <product-list @addProduct='addToCart'></product-list>
-      <check-out :cart="cart" @removeProduct='removeProduct'></check-out>
+      <check-out v-if="showCheckoutPage" :cart="cart" @removeProduct="removeProduct"></check-out>
+      <product-list :products='products' @addProduct="addToCart" v-else></product-list>
     </main>
   </div>
 </template>
@@ -17,33 +16,117 @@ import ProductList from "./components/Lessons.vue";
 import CheckOut from "./components/Checkout.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {
+      showCheckoutPage : false,
       sitename: "Vue.js Lessons",
-      cart: []
-    }
+      cart: [],
+      products: [
+        {
+          id: 1001,
+          name: "Maths",
+          location: "London",
+          price: 50,
+          image: "math.png",
+          spaces: 5,
+        },
+        {
+          id: 1002,
+          name: "English",
+          location: "Birmingham",
+          price: 40,
+          image: "english.png",
+          spaces: 5,
+        },
+        {
+          id: 1003,
+          name: "Physics",
+          location: "Enfield",
+          price: 45,
+          image: "science.jpeg",
+          spaces: 5,
+        },
+        {
+          id: 1004,
+          name: "Chemistry",
+          location: "Birmingham",
+          price: 50,
+          image: "science.jpeg",
+          spaces: 5,
+        },
+        {
+          id: 1005,
+          name: "French",
+          location: "Brighton",
+          price: 45,
+          image: "french.jpeg",
+          spaces: 5,
+        },
+        {
+          id: 1006,
+          name: "Geography",
+          location: "London",
+          price: 50,
+          image: "geography.jpeg",
+          spaces: 5,
+        },
+        {
+          id: 1007,
+          name: "Statistics",
+          location: "Basildon",
+          price: 50,
+          image: "math.png",
+          spaces: 5,
+        },
+        {
+          id: 1008,
+          name: "IT",
+          location: "London",
+          price: 40,
+          image: "IT.png",
+          spaces: 5,
+        },
+        {
+          id: 1009,
+          name: "History",
+          location: "Bournemouth",
+          price: 40,
+          image: "history.jpeg",
+          spaces: 5,
+        },
+        {
+          id: 1010,
+          name: "Biology",
+          location: "Birmingham",
+          price: 45,
+          image: "science.jpeg",
+          spaces: 5,
+        },
+      ],
+    };
   },
   methods: {
     showCheckout() {
+      this.showCheckoutPage = this.showCheckoutPage ? false : true;
     },
     addToCart(product) {
       this.cart.push(product);
     },
     removeProduct(product) {
-      this.cart.some(products => {
-        if(products.id === product.id){
+      this.cart.forEach((product2) => {
+        if (product2.id === product.id) {
           product.spaces++;
-          this.cart.splice(this.cart.indexOf(product),1)
+          this.cart.splice(this.cart.indexOf(product), 1);
         }
       });
-    }
+    },
   },
   components: {
     ProductList,
     CheckOut
-  }
-}
+  },
+};
 </script>
 
 <style>
